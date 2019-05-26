@@ -13,7 +13,7 @@
         android:layout_height="41dp"
         android:onClick="startTimer"
         android:text="Start"
-        app:layout_constraintHorizontal_bias="0.329"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtDurationIn" />
@@ -24,7 +24,7 @@
         android:layout_height="41dp"
         android:onClick="stopTimer"
         android:text="Stop"
-        app:layout_constraintHorizontal_bias="0.711"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtDurationIn" />
@@ -32,13 +32,14 @@
     <EditText
         android:id="@+id/txtDurationIn"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="45dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:inputType="number"
         app:layout_constraintHorizontal_bias="0.535"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteY="366dp" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <TextView
         android:id="@+id/textView"
@@ -57,13 +58,14 @@
         android:id="@+id/txtTimeOut"
         android:layout_width="115dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="253dp"
-        android:layout_marginBottom="459dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/btnStart" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline"

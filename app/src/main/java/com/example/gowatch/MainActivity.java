@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
+
 public class MainActivity extends AppCompatActivity {
 
 
@@ -43,7 +45,8 @@ public class MainActivity extends AppCompatActivity {
                 public void onTick(long millisUntilFinished) {
                     long minutes = (millisUntilFinished / 1000) / 60;
                     long seconds = (millisUntilFinished / 1000) % 60;
-                    String timeRemaining = minutes+":"+seconds;
+                    String twoDigitSeconds = String.format("%02d", seconds);
+                    String timeRemaining = minutes+":"+twoDigitSeconds;
                     txtTimeOut.setText(timeRemaining);
                 }
 
