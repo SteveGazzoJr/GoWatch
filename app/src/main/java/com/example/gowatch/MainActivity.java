@@ -14,32 +14,37 @@ public class MainActivity extends AppCompatActivity {
 
     CountDownTimer timer;
     boolean isTimerSet = false;
+    Button startButton;
+    Button stopButton;
+    TextView txtTimeOut;
+    EditText txtDurationIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button stopButton = findViewById(R.id.btnStop);
-        stopButton.setEnabled(false);
-        final TextView txtTimeOut = findViewById(R.id.txtTimeOut);
-        txtTimeOut.setVisibility(View.INVISIBLE);
 
+        txtTimeOut = findViewById(R.id.txtTimeOut);
+        txtTimeOut.setVisibility(View.INVISIBLE);
+        startButton = findViewById(R.id.btnStart);
+        stopButton = findViewById(R.id.btnStop);
+        txtDurationIn = findViewById(R.id.txtDurationIn);
+        txtTimeOut = findViewById(R.id.txtTimeOut);
+
+        stopButton.setVisibility(View.INVISIBLE);
     }
 
-    private void setTimer(){
+    private void setTimer(String durationIn){
 
-        EditText txtDurationIn = findViewById(R.id.txtDurationIn);
-        final TextView txtTimeOut = findViewById(R.id.txtTimeOut);
-        String ed_text = txtDurationIn.getText().toString().trim();
-        if (!TextUtils.isEmpty(ed_text)) {
-            int duration = Integer.valueOf(ed_text);
-
+        if (!TextUtils.isEmpty(durationIn)) {
+            int duration = Integer.valueOf(durationIn);
             timer = new CountDownTimer(duration * 60 * 1000, 1000) {
                 @Override
                 public void onTick(long millisUntilFinished) {
                     long minutes = (millisUntilFinished / 1000) / 60;
                     long seconds = (millisUntilFinished / 1000) % 60;
-                    txtTimeOut.setText(minutes+":"+seconds);
+                    String timeRemaining = minutes+":"+seconds;
+                    txtTimeOut.setText(timeRemaining);
                 }
 
                 public void onFinish() {
@@ -53,27 +58,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void startTimer(final View view) {
-        Button startButton = findViewById(R.id.btnStart);
-        Button stopButton = findViewById(R.id.btnStop);
-        final TextView txtTimeOut = findViewById(R.id.txtTimeOut);
-        txtTimeOut.setVisibility(View.VISIBLE);
-        startButton.setEnabled(false);
-        stopButton.setEnabled(true);
 
-        setTimer();
+        String durationIn = txtDurationIn.getText().toString();
+        if(!durationIn.equals("")) {
+            txtTimeOut.setVisibility(View.VISIBLE);
+            toggleButtons(startButton, stopButton);
+            setTimer(durationIn);
+        }
     }
 
-    public void kickoffTimer(){
+    private void kickoffTimer(){
         if(isTimerSet) timer.start();
     }
 
     public void stopTimer(final View view) {
 
-        Button startButton = findViewById(R.id.btnStart);
-        Button stopButton = findViewById(R.id.btnStop);
-        startButton.setEnabled(true);
-        stopButton.setEnabled(false);
-        final TextView txtTimeOut = findViewById(R.id.txtTimeOut);
+        toggleButtons(startButton, stopButton);
         txtTimeOut.setVisibility(View.INVISIBLE);
 
         if(isTimerSet) {
@@ -82,4 +82,15 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void toggleButtons(Button start, Button stop){
+
+        if (start.getVisibility() == View.VISIBLE){
+            start.setVisibility(View.INVISIBLE);
+            stop.setVisibility(View.VISIBLE);
+        }
+        else{
+            start.setVisibility(View.VISIBLE);
+            stop.setVisibility(View.INVISIBLE);
+        }
+    }
 }
